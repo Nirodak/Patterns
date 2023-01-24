@@ -36,6 +36,13 @@ class DeliveryTest {
         $$("button").find(exactText("Запланировать")).click();
     }
 
+    public void visible(String date) {
+        $(".notification__content").shouldBe(visible)
+                .shouldHave(text("Встреча успешно запланирована на " + date));
+
+    }
+
+
     @Test
     @DisplayName("Should successful plan and replan meeting")
     void shouldSuccessfulPlanAndRePlanMeeting() {
@@ -49,13 +56,11 @@ class DeliveryTest {
         $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE, firstMeetingDate, Keys.ESCAPE);
         enterValue("ru");
         clicker();
-        $(".notification__content").shouldBe(visible)
-                .shouldHave(text("Встреча успешно запланирована на " + firstMeetingDate));
+        visible(firstMeetingDate);
         $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE, secondMeetingDate, Keys.ESCAPE);
         $$("button").find(exactText("Запланировать")).click();
         $$("button").find(exactText("Перепланировать")).click();
-        $(".notification__content").shouldBe(visible)
-                .shouldHave(text("Встреча успешно запланирована на " + secondMeetingDate));
+        visible(secondMeetingDate);
         Configuration.holdBrowserOpen = true;
 
         // TODO: добавить логику теста в рамках которого будет выполнено планирование и перепланирование встречи.
