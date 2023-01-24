@@ -46,7 +46,7 @@ class DeliveryTest {
         while (firstMeetingDate == secondMeetingDate) {
             secondMeetingDate = generateDate();
         }
-        $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE, firstMeetingDate,Keys.ESCAPE);
+        $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE, firstMeetingDate, Keys.ESCAPE);
         enterValue("ru");
         clicker();
         $(".notification__content").shouldBe(visible)
@@ -56,7 +56,7 @@ class DeliveryTest {
         $$("button").find(exactText("Перепланировать")).click();
         $(".notification__content").shouldBe(visible)
                 .shouldHave(text("Встреча успешно запланирована на " + secondMeetingDate));
-        Configuration.holdBrowserOpen=true;
+        Configuration.holdBrowserOpen = true;
 
         // TODO: добавить логику теста в рамках которого будет выполнено планирование и перепланирование встречи.
         // Для заполнения полей формы можно использовать пользователя validUser и строки с датами в переменных
